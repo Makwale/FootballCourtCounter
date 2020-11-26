@@ -1,9 +1,12 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>Football Match</ion-title>
+    <ion-toolbar color="secondary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>FOOTBALL MATCH</ion-title>
 
         <ion-buttons slot="end">
-            <ion-button>Statistics</ion-button>
+            <ion-button (click)="navigateToStats()" style="background-color: black; color: white; border-radius: 5px;">STATISTICS</ion-button>
         </ion-buttons>
     </ion-toolbar>
 
@@ -18,13 +21,13 @@
                     <!-- first row for team name -->
                     <ion-row>
                         <ion-col size="12" style="text-align: center;">
-                            <ion-label>{{matchService.teamsMatch[0].getTeamName()}}</ion-label>
+                            <ion-label style="font-size: 120%;">{{matchService.teamsMatch[0].getTeamName()}}</ion-label>
                         </ion-col>
                     </ion-row>
                     <!-- Second row for goals -->
                     <ion-row>
                         <ion-col size="12" style="text-align: center;">
-                            <ion-label>{{matchService.teamsMatch[0].getGoals()}}</ion-label>
+                            <ion-label style="font-size: 250%;"><b>{{matchService.teamsMatch[0].getGoals()}}</b></ion-label>
                         </ion-col>
                     </ion-row>
                     <!-- Third row for goal label -->
@@ -40,16 +43,15 @@
                             <ion-grid>
                                 <ion-row style="text-align: center;">
                                     <ion-col size="1"></ion-col>
-                                    <ion-col size="4">
-                                        <ion-button>
+                                    <ion-col size="5">
+                                        <ion-button (click)="subGoal(0)" color="secondary">
                                             <ion-icon name="remove-outline"></ion-icon>
                                         </ion-button>
                                     </ion-col>
 
-                                    <ion-col size="1"></ion-col>
 
-                                    <ion-col size="4">
-                                        <ion-button (click)="addGoal(0)">
+                                    <ion-col size="5">
+                                        <ion-button (click)="addGoal(0)" color="secondary">
                                             <ion-icon name="add-outline"></ion-icon>
 
                                         </ion-button>
@@ -65,7 +67,7 @@
 
                         </ion-col>
                         <ion-col size="10" style="text-align: center;">
-                            <ion-button expand="block">Yellow Card</ion-button>
+                            <ion-button color="warning" (click)="addYellowCard(0)" expand="block">Yellow Card</ion-button>
                         </ion-col>
 
                         <ion-col size="1">
@@ -79,7 +81,7 @@
 
                         </ion-col>
                         <ion-col size="10" style="text-align: center;">
-                            <ion-button expand="block">Red Card</ion-button>
+                            <ion-button color="danger" (click)="addRedCard(0)" expand="block">Red Card</ion-button>
                         </ion-col>
 
                         <ion-col size="1">
@@ -93,7 +95,7 @@
 
                         </ion-col>
                         <ion-col size="10" style="text-align: center;">
-                            <ion-button expand="block">Offside</ion-button>
+                            <ion-button (click)="addOffside(0)" expand="block" color="light">Offside</ion-button>
                         </ion-col>
 
                         <ion-col size="1">
@@ -110,13 +112,13 @@
                     <!-- first row for team name -->
                     <ion-row>
                         <ion-col size="12" style="text-align: center;">
-                            <ion-label>{{matchService.teamsMatch[1].getTeamName()}}</ion-label>
+                            <ion-label style="font-size: 120%;">{{matchService.teamsMatch[1].getTeamName()}}</ion-label>
                         </ion-col>
                     </ion-row>
                     <!-- Second row for goals -->
                     <ion-row>
                         <ion-col size="12" style="text-align: center;">
-                            <ion-label>{{matchService.teamsMatch[1].getGoals()}}</ion-label>
+                            <ion-label style="font-size: 250%;"><b>{{matchService.teamsMatch[1].getGoals()}}</b></ion-label>
                         </ion-col>
                     </ion-row>
                     <!-- Third row for goal label -->
@@ -133,7 +135,7 @@
                                 <ion-row style="text-align: center;">
                                     <ion-col size="1"></ion-col>
                                     <ion-col size="4">
-                                        <ion-button>
+                                        <ion-button (click)="subGoal(1)" color="secondary">
                                             <ion-icon name="remove-outline"></ion-icon>
                                         </ion-button>
                                     </ion-col>
@@ -141,7 +143,7 @@
                                     <ion-col size="1"></ion-col>
 
                                     <ion-col size="4">
-                                        <ion-button (click)="addGoal(1)">
+                                        <ion-button color="secondary" (click)="addGoal(1)">
                                             <ion-icon name="add-outline"></ion-icon>
                                         </ion-button>
                                     </ion-col>
@@ -149,12 +151,14 @@
                             </ion-grid>
                         </ion-col>
                     </ion-row>
+
+                    <!-- Other buttons for red, yellow and offsides -->
                     <ion-row>
                         <ion-col size="1">
 
                         </ion-col>
                         <ion-col size="10" style="text-align: center;">
-                            <ion-button expand="block">Yellow Card</ion-button>
+                            <ion-button color="warning" (click)="addYellowCard(1)" expand="block">Yellow Card</ion-button>
                         </ion-col>
 
                         <ion-col size="1">
@@ -168,7 +172,7 @@
 
                         </ion-col>
                         <ion-col size="10" style="text-align: center;">
-                            <ion-button expand="block">Red Card</ion-button>
+                            <ion-button color="danger" (click)="addRedCard(1)" expand="block">Red Card</ion-button>
                         </ion-col>
 
                         <ion-col size="1">
@@ -182,7 +186,7 @@
 
                         </ion-col>
                         <ion-col size="10" style="text-align: center;">
-                            <ion-button expand="block">Offside</ion-button>
+                            <ion-button color="light" (click)="addOffside(1)" expand="block">Offside</ion-button>
                         </ion-col>
 
                         <ion-col size="1">
@@ -195,13 +199,9 @@
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col size="1"></ion-col>
-            <ion-col size="10">
-                <ion-button expand="full" type="reset">RESET</ion-button>
+            <ion-col size="12" style="text-align: center;">
+                <ion-button color="success" style="width: 87%; margin: 0px auto;" (click)="reset()" expand="block" type="reset">RESET</ion-button>
             </ion-col>
-
-
-
         </ion-row>
     </ion-grid>
 </ion-content>

@@ -1,6 +1,11 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+
+
 import { MatchService } from '../match.service';
+import { WinnerPage } from '../winner/winner.page';
 
 @Component({
   selector: 'app-footballmatch',
@@ -9,25 +14,45 @@ import { MatchService } from '../match.service';
 })
 export class FootballmatchPage implements OnInit {
 
-  constructor(public matchService: MatchService ) { }
+  constructor(public matchService: MatchService, private router: Router, private modalController: ModalController ) { }
 
   ngOnInit() {
   }
 
   addGoal(index: number){
-    this.matchService.addGoal(this.matchService.teamsMatch[index].getTeamName());
+    this.matchService.addGoal(index);
   }
 
-  addRedCard(tname: string){
-    this.matchService.addRedCard(tname);
+  addRedCard(index: number){
+    this.matchService.addRedCard(index);
   }
 
-  addYellowCard(tname: string){
-    this.matchService.addYellowCard(tname);
+  addYellowCard(index: number){
+    this.matchService.addYellowCard(index);
   }
 
-  addOffside(tname: string){
-    this.matchService.addOffside(tname);
+  addOffside(index: number){
+    this.matchService.addOffside(index);
+  }
+
+  async reset(index: number){
+    if(confirm("Are you sure you want to end the match?")){
+      const modal = await this.modalController.create({
+        component: WinnerPage
+      })
+  
+      modal.present();
+    }
+  
+   
+  }
+
+  navigateToStats(){
+    this.router.navigateByUrl("stats");
+  }
+
+  subGoal(index){
+    this.matchService.subGoal(index);
   }
 
 }

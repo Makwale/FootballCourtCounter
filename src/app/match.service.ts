@@ -6,58 +6,44 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MatchService {
-  public teamsMatch: Team[] = [new Team("Cape Town City"),new Team("Orlando Pirates")
-];
+  public teamsMatch: Team[] = [];
+
   constructor() { 
-    console.log(this.teamsMatch)
+
   }
   
-  public addTeam(team: Team){
-    this.teamsMatch.push(team)
+  public addTeam(team: string){
+    this.teamsMatch.push(new Team(team))
   }
 
-  public addGoal(tname: string){
-    for(let index = 0; index < this.teamsMatch.length; index++){
-      if(this.teamsMatch[index] != undefined){
-       let team = this.teamsMatch[index];
-     
-      if(team.getTeamName() === tname){
-        console.log(team);
-        team.setGoals();
-        break;
-      }
-      }
-    }
+  public addGoal(index: number){
+    this.teamsMatch[index].setGoals();
   }
 
-  public addYellowCard(tname: string){
-    for(let team of this.teamsMatch){
-      if(team.getTeamName() == tname){
-        team.setYellowCards();
-        break;
-      }
-    }
+  public addYellowCard(index: number){
+    
+        this.teamsMatch[index].setYellowCards();
+ 
   }
 
   
-  public addRedCard(tname: string){
-    for(let team of this.teamsMatch){
-      if(team.getTeamName() == tname){
-        team.setRedCards();
-        break;
-      }
-    }
+  public addRedCard(index: number){
+    
+    this.teamsMatch[index].setRedCards();
+    
   }
 
   
-  public addOffside(tname: string){
-    for(let team of this.teamsMatch){
-      if(team.getTeamName() == tname){
-        team.setOffisides();
-        break;
-      }
-    }
+  public addOffside(index: number){
+    
+    this.teamsMatch[index].setOffisides();
   }
+
+  subGoal(index: number){
+    if(this.teamsMatch[index].getGoals() > 0)
+      this.teamsMatch[index].subGoal()
+  }
+
 }
 
 
@@ -105,5 +91,8 @@ class Team{
   public setOffisides(){ 
     this.offsides++;
   }
+   public subGoal(){
+     this.goals--;
+   }
 
 }

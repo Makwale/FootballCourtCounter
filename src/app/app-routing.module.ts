@@ -15,6 +15,14 @@ const routes: Routes = [
     path: 'footballmatch',
     loadChildren: () => import('./footballmatch/footballmatch.module').then( m => m.FootballmatchPageModule)
   },
+  {
+    path: 'stats',
+    loadChildren: () => import('./stats/stats.module').then( m => m.StatsPageModule)
+  },
+  {
+    path: 'winner',
+    loadChildren: () => import('./winner/winner.module').then( m => m.WinnerPageModule)
+  },
 ];
 
 @NgModule({
